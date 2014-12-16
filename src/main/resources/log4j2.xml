@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN" monitorInterval="30">
+    <Appenders>
+        <Console name="Console" target="SYSTEM_OUT">
+            <PatternLayout pattern="%d{yyyy.MM.dd HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n" />
+        </Console>
+        <File name="TestLog" fileName="logs/test.log" append="false">
+            <PatternLayout pattern="%d{yyyy.MM.dd HH:mm:ss.SSS} %-5level %class{36} %L %M - %msg%xEx%n" />
+        </File>
+        <RollingFile name="AppLog" fileName="logs/app.log" filePattern="logs/$${date:yyyy-MM}/app-%d{MM-dd-yyyy}-%i.log.gz">
+            <PatternLayout pattern="%d{yyyy.MM.dd 'at' HH:mm:ss z} %-5level %class{36} %L %M - %msg%xEx%n" />
+            <SizeBasedTriggeringPolicy size="5 MB" />
+        </RollingFile> 
+    </Appenders>
+    <Loggers>
+        <!-- "trace", "debug", "info", "warn", "error"  -->
+        <!--  
+        <Logger name="luna.tmm.rosettastone.application.JerseyApp" level="trace" additivity="true">
+            <AppenderRef ref="TestLog" />
+        </Logger>
+        -->
+        <Root level="trace">
+            <AppenderRef ref="Console" />
+            <AppenderRef ref="AppLog" />
+            <AppenderRef ref="TestLog" />
+        </Root>
+    </Loggers>
+</Configuration>
